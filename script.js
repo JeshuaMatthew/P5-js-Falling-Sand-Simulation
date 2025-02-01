@@ -48,10 +48,23 @@ class SandParticle{
 
 }
 
-class SmokeParticle{
+class StoneParticle{
     constructor(){
         this.flammable = false;
         this.color = "#b1b1b1";
+        this.acceleration = 0;
+    }
+
+    particleUpdate(x, y){
+        nextGenGrid[x][y] = currentGrid[x][y];
+    }
+
+}
+
+class SmokeParticle{
+    constructor(){
+        this.flammable = false;
+        this.color = "#474747";
         this.acceleration = 1;
     }
 
@@ -170,6 +183,8 @@ function checkParticleMode(){
             return new WaterParticle();
         case 3:
             return new SmokeParticle();
+        case 4:
+            return new StoneParticle();
         case 0:
             return null;
     }
@@ -185,6 +200,9 @@ function keyPressed(){
         break;
         case '3':
             currentParticleMode = 3;
+        break;
+        case '4':
+            currentParticleMode = 4;
         break;
         case '0':
             currentParticleMode = 0;
@@ -206,5 +224,5 @@ function draw(){
 
     noFill();
     stroke("#ffffff")
-    circle(mouseX,mouseY,100);
+    circle(mouseX,mouseY,particlePlacementDiameter);
 }
